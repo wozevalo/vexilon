@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* scroll-behavior: smooth removed — Lenis handles smooth scroll.
+       Keeping this conflicts with Lenis and causes stuttering. */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-gray-50 dark:bg-black text-gray-900 dark:text-white;
+  }
+
+  ::selection {
+    @apply bg-vexilon-primary text-white;
+  }
+}
+
+@layer utilities {
+  .no-scroll {
+    overflow: hidden;
+  }
+}
+
+
+@media (max-width: 768px)  {
+  .woze{
+    padding: 3rem;
+  }
+ .grid {
+    display: block;
+}
+}

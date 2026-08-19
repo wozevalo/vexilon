@@ -1,0 +1,57 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Next.js
+.next/
+out/
+
+# Production
+build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env
+.env.local
+.env.example
+.env*.local
+claude.md
+SECURITY.md
+generate-hash.js
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Claude
+.claude/*
+!.claude/worktrees/
+.claude/worktrees/*
+!.claude/worktrees/agent-a65cb001/
+.claude/worktrees/agent-a65cb001/*
+!.claude/worktrees/agent-a65cb001/Presentation_vexilon_2026.pdf
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

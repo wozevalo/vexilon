@@ -1,0 +1,189 @@
+/* ===== Tornado Team Section ===== */
+.section {
+  padding: 9rem 1.5rem 20rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Headline */
+.headline {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.titleBig {
+  font-size: clamp(5rem, 18vw, 25rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  user-select: none;
+}
+
+/* Tornado Wrapper + List */
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 51vh;
+  min-height: 450px;
+  max-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*
+   * clamp(-34rem, -25vw, -12rem):
+   *   ~769px  → -12rem   (tablet start)
+   *   ~1024px → -16rem
+   *   ~1440px → -22.5rem
+   *   ~1920px → -30rem
+   *   ≥2176px → -34rem   (wide desktop cap)
+   * Mobile (<768px) overrides to margin-top: 0 below.
+   */
+  margin-top: clamp(-34rem, -25vw, -12rem);
+}
+
+.list {
+  perspective: 90vw;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  transform: rotate(5deg);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tornado Items */
+.item {
+  pointer-events: auto;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Teammate Card — calibrated for 6 members */
+.card {
+  perspective: 2000px;
+  width: 22vw;
+  max-width: 300px;
+  min-width: 170px;
+}
+
+.pic {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #1a1a1a;
+}
+
+.pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hover overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.62);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlayRole {
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #BC13FE;
+  text-shadow: 0 0 12px rgba(188, 19, 254, 0.8);
+}
+
+.overlayName {
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1.1;
+}
+
+.overlayLastName {
+  font-size: clamp(0.8rem, 1.4vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Container for flex-order reversal on mobile */
+.container {
+  position: relative;
+}
+
+/* ===== Tablet (769px – 1024px) ===== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .section {
+    padding: 6rem 1.25rem 3rem;
+  }
+
+  .wrapper {
+    height: 55vh;
+    min-height: 400px;
+  }
+
+  .card {
+    width: 26vw;
+    min-width: 140px;
+    max-width: 240px;
+  }
+}
+
+
+
+
+/* ===== Mobile (≤768px) ===== */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem 3rem;
+  }
+
+
+ 
+
+  /* Reverse: carousel on top, title below */
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wrapper {
+    order: 1;
+    height: 50vh;
+    min-height: 38rem;
+    margin-top: 0; /* no negative overlap needed — carousel is first */
+  }
+
+  .headline {
+    
+  }
+
+  .card {
+    width: 40vw;
+    min-width: 130px;
+  }
+}

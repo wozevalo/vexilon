@@ -1,0 +1,15 @@
+# Vexilon Esport
+
+> Structure Esport française ambitieuse et professionnelle.
+
+## Pages
+
+- [Accueil](https://vexilon-esport.fr): Page principale présentant Vexilon Esport, nos valeurs et nos équipes.
+- [Blog](https://vexilon-esport.fr/blog): Actualités et articles de la structure.
+- [Membres](https://vexilon-esport.fr/membres): Présentation des membres et joueurs de la structure.
+- [Mentions légales](https://vexilon-esport.fr/mentions-legales): Informations légales.
+- [Politique de confidentialité](https://vexilon-esport.fr/confidentialite): Politique de confidentialité et traitement des données.
+
+## À propos
+
+Vexilon Esport est une structure esport française fondée avec pour mission de rassembler, fédérer, promouvoir et représenter la communauté esport. Nous accompagnons les joueurs et équipes dans leur développement compétitif.
