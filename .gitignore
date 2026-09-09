@@ -46,3 +46,10 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# No videos in git
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
