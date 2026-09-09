@@ -18,7 +18,7 @@ const Blog: React.FC = () => {
   if (articles.length === 0) return null;
 
   return (
-    <section id="blog" className="py-32 px-6 transition-colors duration-500">
+    <section id="blog" className="px-6 transition-colors duration-500">
       <div className="container mx-auto">
         {/* Titre */}
         <div className="text-center mb-16">

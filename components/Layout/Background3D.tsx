@@ -168,15 +168,43 @@ const Background3D = () => {
     gl.enableVertexAttribArray(posLoc);
     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
-    // Mobile: 0.35× — desktop: 0.5× (FBM noise is smooth, upscaling invisible)
+    /*
+     * Résolution de rendu.
+     *
+     * L'ancien calcul multipliait la largeur en pixels CSS par 0.35 sur mobile
+     * sans jamais regarder devicePixelRatio. Sur un téléphone de 390 px CSS à
+     * DPR 3 — donc 1170 pixels réels — le fond était calculé en 136 px de large
+     * puis étiré sur 1170 : 12 % de la définition de l'écran, d'où son aspect
+     * très pixelisé.
+     *
+     * On raisonne désormais en facteur d'agrandissement constant : le fond est
+     * toujours calculé à la moitié de la définition réelle, ce que le bruit FBM
+     * supporte sans que cela se voie. Un écran en DPR 1 retrouve exactement le
+     * 0.5 d'avant ; un téléphone en DPR 3 passe de 0.35 à 1.5.
+     */
+    const TARGET_UPSCALE = 2;
+    const MAX_DPR = 3;
+    /** Plafond de sécurité : au-delà, le coût monte sans gain visible. */
+    const MAX_PIXELS = 1_200_000;
+
+    /** Abaissé par le garde-fou de fluidité si l'appareil ne suit pas. */
+    let quality = 1;
+
     const isMobile = () => window.innerWidth < 768;
+
     const resize = () => {
-      const scale = isMobile() ? 0.35 : 0.5;
-      // visualViewport gives stable height on iOS (excludes address bar)
+      // visualViewport donne une hauteur stable sur iOS (barre d'adresse exclue)
       const vw = window.visualViewport?.width  ?? window.innerWidth;
       const vh = window.visualViewport?.height ?? window.innerHeight;
-      canvas.width  = Math.round(vw * scale);
-      canvas.height = Math.round(vh * scale);
+
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+      let ratio = (dpr / TARGET_UPSCALE) * quality;
+
+      const requested = vw * vh * ratio * ratio;
+      if (requested > MAX_PIXELS) ratio *= Math.sqrt(MAX_PIXELS / requested);
+
+      canvas.width  = Math.max(1, Math.round(vw * ratio));
+      canvas.height = Math.max(1, Math.round(vh * ratio));
       gl.viewport(0, 0, canvas.width, canvas.height);
       // Desktop → 1.0 (neutre, shader identique à avant)
       // Mobile  → ratio réel pour corriger le portrait
@@ -192,6 +220,24 @@ const Background3D = () => {
     const t0 = performance.now();
     let firstFrame = true;
 
+    /*
+     * Garde-fou de fluidité.
+     *
+     * La résolution ci-dessus est nettement plus exigeante sur mobile qu'avant.
+     * Plutôt que de deviner quels appareils tiennent la charge, on mesure : si
+     * la moyenne dépasse le seuil sur un échantillon d'images, on redescend une
+     * fois. Un fond net qui saccade serait pire que le problème d'origine.
+     *
+     * La mesure démarre après la première image, pour ne pas compter la
+     * compilation du shader.
+     */
+    const SAMPLE_FRAMES = 90;
+    const SLOW_FRAME_MS = 22; // ~45 images/s
+    let samples = 0;
+    let totalMs = 0;
+    let lastFrame = 0;
+    let measured = false;
+
     const render = () => {
       rafId = requestAnimationFrame(render);
       gl.uniform1f(uTimeLoc, (performance.now() - t0) / 1000);
@@ -200,6 +246,20 @@ const Background3D = () => {
       if (firstFrame) {
         firstFrame = false;
         canvas.style.opacity = '1';
+      } else if (!measured) {
+        const now = performance.now();
+        if (lastFrame) {
+          totalMs += now - lastFrame;
+          samples++;
+          if (samples >= SAMPLE_FRAMES) {
+            measured = true;
+            if (totalMs / samples > SLOW_FRAME_MS) {
+              quality = 0.7;
+              resize();
+            }
+          }
+        }
+        lastFrame = now;
       }
     };
     render();
@@ -209,6 +269,7 @@ const Background3D = () => {
         cancelAnimationFrame(rafId);
       } else {
         cancelAnimationFrame(rafId);
+        lastFrame = 0;
         render();
       }
     };

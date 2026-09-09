@@ -170,9 +170,7 @@
 
 /* ===== Mobile (≤768px) ===== */
 @media (max-width: 768px) {
-  .section {
-    padding: 4rem 1rem 3rem;
-  }
+  
 
 
  
