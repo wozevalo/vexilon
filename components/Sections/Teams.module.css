@@ -1,6 +1,6 @@
 /* ===== Tornado Team Section ===== */
 .section {
-  padding: 9rem 1.5rem 20rem;
+  padding: 9rem 1.5rem 5rem;
   overflow: hidden;
   position: relative;
 }
@@ -17,6 +17,18 @@
   line-height: 0.85;
   letter-spacing: -0.03em;
   user-select: none;
+}
+
+/*
+ * « MY » au-dessus, « TEAM » en dessous, quelle que soit la largeur.
+ * Les deux mots étaient de simples <span> en ligne : ils ne passaient à la
+ * ligne que lorsque la place manquait, donc la disposition changeait selon
+ * la taille de l'écran. En bloc, l'empilement est garanti à toute taille,
+ * et la typographie de .titleBig (taille fluide, graisse, interlignage,
+ * approche) reste inchangée puisqu'elle est portée par le parent.
+ */
+.titleLine {
+  display: block;
 }
 
 /* Tornado Wrapper + List */

@@ -25,11 +25,326 @@
 }
 
 
-@media (max-width: 768px)  {
-  .woze{
+/*
+ * `.grid { display: block }` a ete retire d'ici : la regle annulait TOUTES
+ * les grilles sous 768 px. Consequences en cascade sur mobile — l'espacement
+ * disparaissait (`gap` ne s'applique qu'aux grilles et aux flex, d'ou des
+ * cartes collees les unes aux autres sur la page evenements) et les
+ * centrages en `grid place-items-center` cessaient d'operer, notamment sur
+ * les boutons de lecture et les fleches de la visionneuse.
+ *
+ * Elle ne servait qu'a empiler les trois piliers de la section A propos,
+ * qui utilisent desormais `grid-cols-1 sm:grid-cols-3` pour le faire
+ * proprement, sans effet de bord sur le reste du site.
+ */
+@media (max-width: 768px) {
+  .woze {
     padding: 3rem;
   }
- .grid {
-    display: block;
 }
+/* ──────────────────────────────────────────────────────────────────────
+   Contenu riche (description des événements)
+   Tailwind « preflight » remet à zéro titres et listes : on redonne ici
+   un style aux balises produites par l'éditeur du back-office.
+   ────────────────────────────────────────────────────────────────────── */
+
+.rich-content {
+  @apply text-gray-700 dark:text-gray-300 leading-relaxed;
+}
+
+.rich-content > *:first-child {
+  margin-top: 0;
+}
+
+.rich-content h1,
+.rich-content h2,
+.rich-content h3,
+.rich-content h4 {
+  @apply font-display font-bold text-gray-900 dark:text-white;
+  line-height: 1.15;
+}
+
+/* Plus petit que le titre de l'événement affiché sur la bannière :
+   sans cela, deux titres de même taille se disputent la page. */
+.rich-content h1 {
+  @apply text-2xl md:text-4xl uppercase mt-12 mb-5;
+}
+
+.rich-content h2 {
+  @apply text-xl md:text-3xl mt-10 mb-4;
+}
+
+.rich-content h3 {
+  @apply text-lg md:text-2xl mt-8 mb-3;
+}
+
+.rich-content h4 {
+  @apply text-base md:text-lg mt-6 mb-2;
+}
+
+.rich-content p {
+  @apply my-4;
+}
+
+.rich-content strong,
+.rich-content b {
+  @apply font-bold text-gray-900 dark:text-white;
+}
+
+.rich-content em,
+.rich-content i {
+  font-style: italic;
+}
+
+.rich-content u {
+  text-decoration: underline;
+}
+
+.rich-content s {
+  text-decoration: line-through;
+}
+
+.rich-content mark {
+  @apply bg-vexilon-primary/20 text-inherit px-1;
+}
+
+.rich-content a {
+  @apply text-vexilon-primary underline underline-offset-4 decoration-vexilon-primary/40 transition-colors;
+  word-break: break-word;
+}
+
+.rich-content a:hover {
+  @apply decoration-vexilon-primary;
+}
+
+/*
+ * Descriptions d'actualites : le texte reste brut, seuls les liens reperes
+ * par lib/linkify.ts sont mis en forme. Le style est ici et non en classes
+ * Tailwind car lib/ n'est pas balaye par Tailwind (voir tailwind.config.ts).
+ */
+.linked-text a {
+  @apply text-vexilon-primary underline underline-offset-4 decoration-vexilon-primary/40 transition-colors;
+  word-break: break-word;
+}
+
+.linked-text a:hover {
+  @apply decoration-vexilon-primary;
+}
+
+.rich-content ul,
+.rich-content ol {
+  @apply my-4 pl-6 space-y-2;
+}
+
+.rich-content ul {
+  list-style: disc;
+}
+
+.rich-content ol {
+  list-style: decimal;
+}
+
+.rich-content li::marker {
+  color: #bc13fe;
+}
+
+.rich-content blockquote {
+  @apply my-6 pl-5 border-l-2 border-vexilon-primary italic text-gray-600 dark:text-gray-400;
+}
+
+.rich-content hr {
+  @apply my-10 border-gray-200 dark:border-gray-800;
+}
+
+.rich-content figure {
+  @apply my-8;
+}
+
+.rich-content figcaption {
+  @apply mt-2 text-xs text-gray-500 dark:text-gray-500;
+}
+
+.rich-content img,
+.rich-content video {
+  @apply w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800;
+  display: block;
+}
+
+.rich-content iframe {
+  @apply w-full rounded-xl border border-gray-200 dark:border-gray-800;
+  aspect-ratio: 16 / 9;
+  display: block;
+}
+
+/* Variante utilisée dans l'éditeur du back-office (fond sombre) */
+.rich-content--editor {
+  @apply text-gray-200;
+}
+
+.rich-content--editor h1,
+.rich-content--editor h2,
+.rich-content--editor h3,
+.rich-content--editor h4 {
+  @apply text-white;
+}
+
+.rich-content--editor h1 {
+  @apply text-3xl mt-6 mb-3;
+}
+
+.rich-content--editor h2 {
+  @apply text-2xl mt-5 mb-3;
+}
+
+.rich-content--editor h3 {
+  @apply text-xl mt-4 mb-2;
+}
+
+.rich-content--editor img,
+.rich-content--editor video,
+.rich-content--editor iframe {
+  max-height: 320px;
+  width: auto;
+  max-width: 100%;
+}
+
+.rich-content--editor iframe {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Aperçu « thème clair » du back-office.
+   Le back-office tourne toujours avec la classe `dark` sur <html>, donc
+   les variantes `dark:` de Tailwind s'y appliquent partout. Pour montrer
+   le rendu clair du site, on redéclare ici les couleurs explicitement.
+   ────────────────────────────────────────────────────────────────────── */
+
+.rich-content--light {
+  background: #f9fafb;
+  color: #374151;
+}
+
+.rich-content--light h1,
+.rich-content--light h2,
+.rich-content--light h3,
+.rich-content--light h4,
+.rich-content--light strong,
+.rich-content--light b {
+  color: #111827;
+}
+
+.rich-content--light blockquote {
+  color: #4b5563;
+}
+
+.rich-content--light hr,
+.rich-content--light img,
+.rich-content--light video,
+.rich-content--light iframe {
+  border-color: #e5e7eb;
+}
+
+.rich-content--light figcaption {
+  color: #6b7280;
+}
+
+/* ── Contenu riche : tableaux et corrections de rythme ────────────────── */
+
+/* Un « --- » suivi d'un titre créait deux marges cumulées (~80 px de vide) */
+.rich-content hr + h1,
+.rich-content hr + h2,
+.rich-content hr + h3,
+.rich-content hr + h4 {
+  margin-top: 0;
+}
+
+/* Paragraphe vide laissé par l'éditeur */
+.rich-content p:empty {
+  display: none;
+}
+
+/* Les tableaux défilent horizontalement dans leur figure sur petit écran */
+.rich-content figure {
+  overflow-x: auto;
+}
+
+.rich-content table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.rich-content thead {
+  @apply border-b-2 border-vexilon-primary;
+}
+
+.rich-content th {
+  @apply px-4 py-3 text-left font-bold text-gray-900 dark:text-white;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rich-content td {
+  @apply px-4 py-3 align-top text-gray-600 dark:text-gray-400;
+}
+
+.rich-content tbody tr {
+  @apply border-b border-gray-200 dark:border-gray-800;
+}
+
+.rich-content tbody tr:last-child {
+  border-bottom: 0;
+}
+
+.rich-content tbody tr:hover {
+  @apply bg-gray-100/60 dark:bg-white/[0.03];
+}
+
+/* Première colonne mise en avant : c'est presque toujours le libellé */
+.rich-content tbody td:first-child {
+  @apply text-gray-900 dark:text-gray-200 font-medium;
+}
+
+.rich-content caption {
+  @apply mb-2 text-xs uppercase tracking-widest text-gray-500 text-left;
+}
+
+/* Équivalents pour l'aperçu « thème clair » du back-office */
+.rich-content--light th,
+.rich-content--light tbody td:first-child {
+  color: #111827;
+}
+
+.rich-content--light td {
+  color: #4b5563;
+}
+
+.rich-content--light tbody tr {
+  border-color: #e5e7eb;
+}
+
+.rich-content--light tbody tr:hover {
+  background: rgba(0, 0, 0, 0.035);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Bascule clair ↔ sombre
+   Sans cela, seuls les quelques éléments portant `transition-colors`
+   s'adoucissent : tout le reste change d'un coup. La règle ci-dessous
+   fait fondre les couleurs de toute la page, mais uniquement pendant la
+   bascule — ThemeProvider pose la classe puis la retire.
+   ────────────────────────────────────────────────────────────────────── */
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, outline-color;
+  transition-duration: 450ms;
+  transition-timing-function: ease;
+  transition-delay: 0s;
 }

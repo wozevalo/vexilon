@@ -22,7 +22,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="relative py-24 px-6 border-t border-gray-200/20 dark:border-gray-800/30 transition-colors duration-500">
+    <section id="about" className="relative py-24 px-6 transition-colors duration-500">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -33,16 +33,16 @@ const About: React.FC = () => {
               <span className="text-vexilon-primary font-bold tracking-widest uppercase">À Propos</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-8 leading-tight text-gray-900 dark:text-white">
-              PLUS QU'UNE ÉQUIPE, <br /> UNE <span className="text-gray-500">MISSION</span>.
+              PLUS QU&apos;UNE ÉQUIPE, <br /> UNE <span className="text-gray-500">MISSION</span>.
             </h2>
             <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8">
-              Implantés dans l'Yonne, nous sommes une équipe de 11 bénévoles animés par une même conviction : faire de notre département un territoire pionnier de l'e-sport responsable. Notre engagement repose sur la passion du jeu vidéo et la volonté de le mettre au service du lien social.
+              Implantés dans l&apos;Yonne, nous sommes une équipe de 11 bénévoles animés par une même conviction : faire de notre département un territoire pionnier de l&apos;e-sport responsable. Notre engagement repose sur la passion du jeu vidéo et la volonté de le mettre au service du lien social.
             </p>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-12">
-              Nous défendons un gaming fondé sur le fair-play, l'inclusion et le partage. Chacun de nos événements est pensé comme un espace d'échange où la passion du jeu rapproche les générations et brise l'isolement numérique.
+              Nous défendons un gaming fondé sur le fair-play, l&apos;inclusion et le partage. Chacun de nos événements est pensé comme un espace d&apos;échange où la passion du jeu rapproche les générations et brise l&apos;isolement numérique.
             </p>
 
-            <div className=" grid  grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {pillars.map((pillar, idx) => (
                 <div key={idx} className="flex woze flex-col items-center lg:items-start group">
                   <div className="mb-4 text-vexilon-primary group-hover:scale-110 transition-transform duration-300">
@@ -57,13 +57,12 @@ const About: React.FC = () => {
 
           {/* Visual/Image Placeholder */}
           <div className="relative">
-            <div className="absolute -inset-4 border-2 border-vexilon-primary opacity-30 translate-x-4 translate-y-4"></div>
             <div className="relative aspect-square overflow-hidden bg-gray-200 dark:bg-gray-900">
               <Image
                 src="/img/team.jpg"
                 alt="L'équipe Vexilon Esport"
                 fill
-                className="object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-700"
+                className="object-cover hover:scale-105 transition-all duration-700"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent dark:from-black dark:via-transparent"></div>

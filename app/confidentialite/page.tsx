@@ -1,23 +1,17 @@
 'use client';
 
-import { ArrowLeft} from 'lucide-react';
-import Link from 'next/link';
+import SiteHeader from '@/components/Layout/SiteHeader';
 
 export default function ConfidentialitePage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white transition-colors duration-500">
+      <SiteHeader />
+
       <header className="border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-4xl mx-auto px-6 py-6 flex items-center justify-between">
           <h1 className="text-2xl md:text-4xl font-display font-bold uppercase tracking-wider">
             Politique de <span className="text-vexilon-primary">Confidentialité</span>
           </h1>
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-xs uppercase tracking-widest text-gray-400 hover:text-vexilon-primary transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Accueil
-          </Link>
         </div>
       </header>
 

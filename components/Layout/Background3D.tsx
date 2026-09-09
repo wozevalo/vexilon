@@ -241,6 +241,10 @@ const Background3D = () => {
         opacity: 0,
         transition: 'opacity 0.7s ease',
         backgroundColor: '#020108',
+        // Même fondu de bas de Hero que BackgroundLight : les deux thèmes
+        // doivent rejoindre la section suivante de façon identique.
+        WebkitMaskImage: 'linear-gradient(to bottom, #000 68%, transparent 97%)',
+        maskImage: 'linear-gradient(to bottom, #000 68%, transparent 97%)',
       }}
     />
   );

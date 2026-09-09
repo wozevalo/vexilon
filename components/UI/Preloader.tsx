@@ -2,6 +2,7 @@
 
 import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
+import Image from 'next/image';
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -68,9 +69,12 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
       >
         {/* Placeholder for SVG Logo - Using a styled div for now */}
         <div ref={logoRef} className="mb-6">
-          <img
+          <Image
             src="/logo.png"
             alt="VEXILON"
+            width={128}
+            height={57}
+            priority
             className="w-24 md:w-32 h-auto"
           />
         </div>

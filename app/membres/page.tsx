@@ -1,20 +1,20 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import SiteHeader from '@/components/Layout/SiteHeader';
+import Image from 'next/image';
 
 const poles = [
   {
     label: 'Le Bureau',
     count: '4 membres',
     description: 'Assurant la direction et la gestion administrative.',
-    names: ['Eduardo TELES DOS SANTOS — Président & Fondateur', 'Yoann FERRAND — Vice-Président & Fondateur', 'Amélia FERNANDES — Secrétaire', 'Rodrigo TELES DOS SANTOS — Trésorier'],
+    names: ['Eduardo TELES DOS SANTOS - Président & Fondateur', 'Yoann FERRAND - Vice-Président & Fondateur', 'Amélia FERNANDES - Secrétaire', 'Rodrigo TELES DOS SANTOS - Trésorier'],
   },
   {
     label: 'Pôle Technique',
     count: '1 membre',
     description: 'Développeur full-stack',
-    names: ['Ilia Choumitzky — Développement Web'],
+    names: ['Ilia Choumitzky - Développement Web'],
   },
   {
     label: 'Équipe de Terrain',
@@ -28,25 +28,19 @@ export default function MembresPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0B0F1A] text-gray-900 dark:text-white transition-colors duration-300">
 
-      {/* ── Back link ─────────────────────────────────── */}
-      <div className="absolute top-6 left-6 z-20">
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 hover:text-[#BC13FE] transition-colors duration-200"
-        >
-          <ArrowLeft size={14} />
-          Retour
-        </Link>
-      </div>
+      <SiteHeader />
 
       {/* ── Hero image ───────────────────────────────────── */}
-      <div className="w-full pt-20 pb-10 px-6 md:px-16 lg:px-24">
+      <div className="w-full pb-10 px-6 md:px-16 lg:px-24">
         <div className="relative w-full h-[55vh] min-h-[340px] max-h-[600px] overflow-hidden rounded-2xl">
           {/* Image */}
-          <img
+          <Image
             src="/img/team.jpg"
             alt="Membres Vexilon"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+            className="object-cover object-center"
           />
 
           {/* Dark gradient overlay */}
@@ -76,7 +70,7 @@ export default function MembresPage() {
       {/* ── Description ───────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-6 pt-10 pb-8">
         <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl leading-relaxed">
-          Notre structure s'appuie sur un noyau dur de{' '}
+          Notre structure s&apos;appuie sur un noyau dur de{' '}
           <span className="text-gray-900 dark:text-white font-semibold">11 membres actifs</span>,
           renforcés par des bénévoles opérationnels pour garantir le succès de nos rassemblements.
         </p>
@@ -128,7 +122,7 @@ export default function MembresPage() {
               11 membres !
             </p>
             <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-              Une communauté en pleine expansion — chaque événement attire de nouveaux talents,
+              Une communauté en pleine expansion - chaque événement attire de nouveaux talents,
               de nouveaux engagements. VEXILON grandit vite, et les portes restent ouvertes.
             </p>
           </div>

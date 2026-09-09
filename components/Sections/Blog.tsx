@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { getArticles } from '@/lib/storage';
 import { Article } from '@/lib/types';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import ArticleText from '@/components/Blog/ArticleText';
 
 const Blog: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -43,11 +45,10 @@ const Blog: React.FC = () => {
                   {article.title}
                 </h3>
                 <div className="w-10 h-0.5 bg-vexilon-primary mb-4" />
-                {article.content && (
-                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-4">
-                    {article.content}
-                  </p>
-                )}
+                <ArticleText
+                  content={article.content}
+                  className="text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-4"
+                />
                 <p className="text-gray-400 dark:text-gray-600 text-xs uppercase tracking-widest mt-4">
                   {new Date(article.publishedAt).toLocaleDateString('fr-FR', {
                     day: 'numeric',
@@ -60,11 +61,15 @@ const Blog: React.FC = () => {
               {/* Image */}
               <div className="flex-1 w-full">
                 <div className="overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-vexilon-primary transition-colors duration-500">
-                  <img
+                  <Image
                     src={article.imagePath}
                     alt={article.title}
+                    width={1200}
+                    height={800}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    /* Ratio reel inconnu (fichier depose) : w-full/h-auto laisse
+                       le navigateur le recalculer une fois l'image decodee. */
                     className="w-full h-auto object-contain"
-                    loading="lazy"
                   />
                 </div>
               </div>

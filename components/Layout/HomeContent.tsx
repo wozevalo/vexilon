@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Preloader from '@/components/UI/Preloader';
 import Navbar from '@/components/Layout/Navbar';
@@ -14,13 +14,28 @@ import { useTheme } from '@/components/ThemeProvider';
 
 const SmoothScroll = dynamic(() => import('@/components/Layout/SmoothScroll'), { ssr: false });
 
+// useLayoutEffect n'existe pas au rendu serveur : on retombe sur useEffect
+// pour éviter l'avertissement de React.
+const useBeforePaint = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
 export default function HomeContent() {
-  const preloaderShown = usePreloaderStore((state) => state.shown);
   const setPreloaderShown = usePreloaderStore((state) => state.setShown);
 
-  const [isLoading, setIsLoading] = useState(!preloaderShown);
-  const [contentVisible, setContentVisible] = useState(preloaderShown);
-  const { theme, toggleTheme } = useTheme();
+  // Le rendu serveur ignore localStorage : il produit donc toujours l'état
+  // « animation à jouer ». On tranche juste après le montage, avant le
+  // premier affichage, pour ne pas laisser apparaître l'animation.
+  const [isLoading, setIsLoading] = useState(true);
+  const [contentVisible, setContentVisible] = useState(false);
+
+  useBeforePaint(() => {
+    if (usePreloaderStore.getState().shown) {
+      setIsLoading(false);
+      setContentVisible(true);
+    }
+  }, []);
+
+  // La Navbar lit le thème elle-même ; seul Hero en a encore besoin ici.
+  const { theme } = useTheme();
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
@@ -36,7 +51,7 @@ export default function HomeContent() {
       {!isLoading && (
         <SmoothScroll>
           <div className={`transition-opacity duration-1000 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <Navbar theme={theme} toggleTheme={toggleTheme} />
+            <Navbar />
             <main className="relative z-10 flex flex-col gap-0">
               <Hero theme={theme} />
               <About />

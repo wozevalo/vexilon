@@ -1,0 +1,61 @@
+[
+  {
+    "id": "ce704b34-553c-4ea7-8941-bfdfb95c5a8e",
+    "slug": "teste",
+    "title": "teste",
+    "startDate": "2026-08-19T11:00:00.000Z",
+    "endDate": "2026-08-19T11:08:00.000Z",
+    "description": "<h1>bonjour</h1><h2>salut</h2><h3>aurevoir</h3><div><a href=\"https://voxio.fr\" target=\"_blank\" rel=\"noopener noreferrer\">lien</a></div>",
+    "excerpt": "qdqzd",
+    "coverPath": "/uploads/16ddc7f3-09b5-41b5-95f3-7768dff1860b.jpg",
+    "location": "paris",
+    "ctaLabel": "https://voxio.fr/",
+    "ctaUrl": "https://voxio.fr/",
+    "status": "auto",
+    "media": [
+      {
+        "id": "83e50c87-db33-4b87-8bee-c60c20b36500",
+        "type": "video",
+        "path": "/uploads/5eaa47be-2b5b-4f18-b01f-554ff86783be.mp4"
+      },
+      {
+        "id": "04af6d14-3572-4f8a-8b53-8d8881c5d871",
+        "type": "video",
+        "path": "/uploads/39a0b05b-407c-493c-b729-aa6c6ad724a9.mp4"
+      },
+      {
+        "id": "57df5077-0597-45fe-b62b-9be4b6f01ee2",
+        "type": "image",
+        "path": "/uploads/21ccff1b-8044-48a3-9127-897b11d6a93d.jpg"
+      }
+    ],
+    "createdAt": "2026-08-19T11:05:49.852Z",
+    "updatedAt": "2026-08-19T11:09:00.280Z"
+  },
+  {
+    "id": "7c6aecf3-86c1-4c8c-9aac-6c80bb1d7316",
+    "slug": "qzqzdqz",
+    "title": "qzqzdqz",
+    "startDate": "2026-08-19T14:00:00.000Z",
+    "description": "<p></p><h1>🎯 Nexus Clash #4 — Tournoi Valorant</h1><blockquote><strong>Vendredi 21 août 2026</strong> · En ligne (serveurs EU — Paris/Francfort) · 5v5 · Ouvert à tous</blockquote><p>Un tournoi Valorant en une journée, format compact, du premier match à la grande finale en soirée. Que tu joues en Fer ou en Radiant, il y a une place pour ton équipe.</p><blockquote>ℹ️ <em>Document de démonstration : toutes les informations ci-dessous (noms, e-mails, liens, montants) sont fictives.</em></blockquote><hr /><h2>📌 Informations clés</h2><hr /><h2>🏆 Récompenses</h2><hr /><h2>📅 Déroulé de la journée</h2><hr /><h2>📝 Inscriptions</h2><ol><li>Constituer une équipe de <strong>5 joueurs</strong> (+ 1 remplaçant optionnel).</li><li>Remplir le formulaire : <strong><a href=\"https://example.com/nexus-clash/inscription\" target=\"_blank\" rel=\"noopener noreferrer\">https://example.com/nexus-clash/inscription</a></strong></li><li>Rejoindre le Discord officiel : <strong>discord.gg/nexusclash-demo</strong></li><li>Le capitaine confirme l'équipe via le check-in le jour J entre 13h00 et 13h45.</li></ol><blockquote>⚠️ Toute équipe absente au check-in est remplacée par une équipe en liste d'attente.</blockquote><hr /><h2>📖 Règlement</h2><h3>Composition des équipes</h3><ul><li>5 joueurs titulaires, 1 remplaçant maximum.</li><li>Un joueur ne peut représenter qu'une seule équipe.</li><li>Compte Valorant sur la région <strong>EU</strong> obligatoire.</li><li>Les smurfs et le compte partagé (account sharing) sont interdits.</li></ul><h3>Déroulement des matchs</h3><ul><li>Mode <strong>Partie personnalisée</strong>, réglages compétitifs, tricheurs désactivés.</li><li>Sélection des cartes : ban/pick alterné, l'équipe la mieux classée dans le bracket commence.</li><li>Pool de cartes : Ascent, Bind, Haven, Lotus, Split, Sunset, Icebox.</li><li>Retard toléré : <strong>10 minutes</strong>. Au-delà, forfait automatique.</li><li>Screenshot du scoreboard final obligatoire, envoyé dans le salon #résultats.</li></ul><h3>Comportement</h3><ul><li>Toxicité, triche, exploits de bugs ou griefing = <strong>disqualification immédiate</strong>.</li><li>Les décisions des arbitres sont finales.</li><li>Toute réclamation doit être déposée dans les 15 minutes suivant la fin du match.</li></ul><hr /><h2>📺 Diffusion</h2><ul><li><strong>Twitch</strong> : twitch.tv/nexusclash_demo</li><li><strong>YouTube</strong> : youtube.com/@nexusclash-demo</li><li>Commentateurs : Léa « Vyrra » Marchand &amp; Tom « Skarn » Delacroix</li><li>Les matchs diffusés sont en différé de 3 minutes (anti-stream sniping).</li></ul><hr /><h2>👥 Contact &amp; staff</h2><hr /><h2>❓ FAQ</h2><p><strong>Puis-je m'inscrire sans équipe complète ?</strong><br />Oui — un salon #recherche-équipe est disponible sur le Discord.</p><p><strong>Y a-t-il une limite de rang ?</strong><br />Oui : la moyenne des rangs de l'équipe ne doit pas dépasser Immortel 2. Un seul joueur Radiant est toléré par roster.</p><p><strong>Que se passe-t-il en cas de déconnexion ?</strong><br />Un seul <em>tactical pause</em> de 5 minutes par équipe et par match est autorisé. Au-delà, le match reprend sans le joueur.</p><p><strong>Les remplaçants peuvent-ils entrer en cours de match ?</strong><br />Non, uniquement entre deux matchs et avec l'accord de l'arbitre.</p><hr /><p><em>Dernière mise à jour : 19 août 2026 — Nexus Clash est un événement fictif créé à titre d'exemple.</em></p>",
+    "excerpt": "ilia",
+    "status": "auto",
+    "media": [
+      {
+        "id": "53a83ee6-3115-41a7-b2ba-7dac05931162",
+        "type": "video",
+        "path": "/uploads/35689d1c-8603-4186-b0c5-2fd6b3ff10e9.mp4"
+      },
+      {
+        "id": "7dcc151d-8fc4-4b93-b5b8-9b63e6e2d56e",
+        "type": "image",
+        "path": "/uploads/48446c9e-f996-4a05-a4cb-da49e6365b89.jpg"
+      }
+    ],
+    "createdAt": "2026-08-19T14:55:10.537Z",
+    "updatedAt": "2026-09-08T10:04:19.817Z",
+    "ctaLabel": "toto",
+    "ctaUrl": "https://voxio.fr/",
+    "coverColor": "#5700f3"
+  }
+]

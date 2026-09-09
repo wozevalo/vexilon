@@ -3,22 +3,29 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Sun, Moon, Menu, X } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
 
 interface NavbarProps {
+  /** Optionnels : sans eux, le thème vient directement du ThemeProvider. */
   theme?: 'dark' | 'light';
   toggleTheme?: () => void;
 }
 
+// Les ancres sont préfixées par « / » pour rester valables depuis n'importe
+// quelle page : depuis /evenements, « /#teams » ramène à l'accueil puis défile.
 const navLinks = [
-  { name: 'Accueil',      href: '#hero' },
-  { name: 'Présentation', href: '#about' },
-  { name: 'Équipes',      href: '#teams' },
+  { name: 'Accueil',      href: '/#hero' },
   { name: 'Membres',      href: '/membres' },
+  { name: 'Événements',   href: '/evenements' },
   { name: 'Actualités',   href: '/blog' },
-  { name: 'Contact',      href: '#contact' },
+  { name: 'Contact',      href: '/#contact' },
 ];
 
-const Navbar = ({ theme = 'dark', toggleTheme }: NavbarProps) => {
+const Navbar = ({ theme: themeProp, toggleTheme: toggleThemeProp }: NavbarProps) => {
+  const context = useTheme();
+  const theme = themeProp ?? context.theme;
+  const toggleTheme = toggleThemeProp ?? context.toggleTheme;
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -40,13 +47,15 @@ const Navbar = ({ theme = 'dark', toggleTheme }: NavbarProps) => {
   const pillDark =
     'bg-black/60 backdrop-blur-xl border border-white/10 shadow-[0_0_0_1px_rgba(188,19,254,0.15),0_8px_32px_rgba(0,0,0,0.4)]';
 
+  // Thème clair : fond blanc franc, sans contour — seule une ombre douce
+  // détache la barre de la page. Le noir est réservé au texte.
   const pillLight =
-    'bg-white/80 backdrop-blur-xl border border-gray-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.08)]';
+    'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.10)]';
 
   const pillScrolled = scrolled
     ? theme === 'dark'
       ? 'shadow-[0_0_0_1px_rgba(188,19,254,0.25),0_12px_40px_rgba(0,0,0,0.5)]'
-      : 'shadow-[0_4px_32px_rgba(0,0,0,0.12)]'
+      : 'shadow-[0_6px_28px_rgba(0,0,0,0.18)]'
     : '';
 
   return (
@@ -68,7 +77,7 @@ const Navbar = ({ theme = 'dark', toggleTheme }: NavbarProps) => {
                 className={`relative px-3 py-1.5 text-xs font-semibold tracking-widest uppercase rounded-full transition-all duration-200 group
                   ${theme === 'dark'
                     ? 'text-gray-300 hover:text-white hover:bg-white/8'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-black/5'
+                    : 'text-gray-900 hover:text-gray-900 hover:bg-black/5'
                   }`}
               >
                 {link.name}

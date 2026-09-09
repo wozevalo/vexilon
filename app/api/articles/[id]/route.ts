@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
+import { writeJsonAtomic } from '@/lib/jsonFile';
 import { join } from 'path';
 import { verifySessionToken, SESSION_COOKIE } from '@/lib/serverAuth';
 import { Article } from '@/lib/types';
+import { deleteUploadsIfUnused } from '@/lib/uploadsUsage';
 
 const DATA_PATH = join(process.cwd(), 'data', 'articles.json');
 
@@ -16,7 +18,7 @@ function readArticles(): Article[] {
 }
 
 function writeArticles(articles: Article[]) {
-  writeFileSync(DATA_PATH, JSON.stringify(articles, null, 2));
+  writeJsonAtomic(DATA_PATH, articles);
 }
 
 /** DELETE /api/articles/[id] — protected */
@@ -36,14 +38,11 @@ export async function DELETE(
     return NextResponse.json({ error: 'Article introuvable.' }, { status: 404 });
   }
 
-  // Remove image file
-  if (article.imagePath) {
-    const imgPath = join(process.cwd(), 'public', article.imagePath);
-    if (existsSync(imgPath)) {
-      try { unlinkSync(imgPath); } catch { /* ignore */ }
-    }
-  }
-
   writeArticles(articles.filter((a) => a.id !== params.id));
+
+  // Le dossier /uploads est partagé avec les événements : on n'efface l'image
+  // que si plus personne ne l'utilise (à faire après l'écriture du JSON).
+  if (article.imagePath) deleteUploadsIfUnused([article.imagePath]);
+
   return NextResponse.json({ ok: true });
 }

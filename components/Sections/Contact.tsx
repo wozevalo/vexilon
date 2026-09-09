@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
             <h2 className="text-3xl font-display font-bold text-gray-900 dark:text-white mb-6">VEXILON ESPORT</h2>
             <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
               Structure Esport française ambitieuse et professionnelle. 
-              Rejoignez l'aventure et suivez nos exploits.
+              Rejoignez l&apos;aventure et suivez nos exploits.
             </p>
             <div className="flex gap-4 flex-wrap">
               {[

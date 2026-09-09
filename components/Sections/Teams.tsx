@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import Image from 'next/image';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Teams.module.css';
 
@@ -183,7 +184,8 @@ const Teams: React.FC = () => {
         {/* Headline */}
         <div className={styles.headline}>
           <h2 className={`${styles.titleBig} text-gray-800 dark:text-gray-200`}>
-            <span>MY</span> <span>TEAM</span>
+            <span className={styles.titleLine}>MY</span>
+            <span className={styles.titleLine}>TEAM</span>
           </h2>
         </div>
 
@@ -201,7 +203,14 @@ const Teams: React.FC = () => {
                     ref={(el) => { imgsRef.current[i] = el; }}
                     className={styles.pic}
                   >
-                    <img src={member.image} alt={`${member.firstName} ${member.lastName}`} />
+                    <Image
+                      src={member.image}
+                      alt={`${member.firstName} ${member.lastName}`}
+                      width={300}
+                      height={375}
+                      /* La carte fait 22vw, plafonnee a 300px (Teams.module.css). */
+                      sizes="(max-width: 1360px) 22vw, 300px"
+                    />
                     <div
                       ref={(el) => { overlayRefs.current[i] = el; }}
                       className={styles.overlay}

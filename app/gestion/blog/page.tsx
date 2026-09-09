@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { logout } from '@/lib/auth';
 import { getArticles, addArticle, deleteArticle } from '@/lib/storage';
 import { Article } from '@/lib/types';
-import { useRouter } from 'next/navigation';
-import { LogOut, Plus, Trash2, ImagePlus, X } from 'lucide-react';
+import { Plus, Trash2, ImagePlus, X } from 'lucide-react';
+import AdminShell from '@/components/Admin/AdminShell';
 
 export default function AdminBlogPage() {
-  const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [articles, setArticles] = useState<Article[]>([]);
   const [showForm, setShowForm] = useState(false);
@@ -59,41 +57,8 @@ export default function AdminBlogPage() {
     getArticles().then(setArticles);
   };
 
-  const handleLogout = async () => {
-    await logout();
-    router.push('/gestion');
-  };
-
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="border-b border-gray-800 px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-display font-bold uppercase tracking-widest">
-              Back-office <span className="text-vexilon-primary">Actualités</span>
-            </h1>
-            <p className="text-gray-500 text-xs mt-1">Gérez vos publications et affiches</p>
-          </div>
-          <div className="flex items-center gap-4">
-            <a
-              href="/blog"
-              className="text-xs uppercase tracking-widest text-gray-400 hover:text-white transition-colors"
-            >
-              Voir le blog
-            </a>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 text-xs uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors"
-            >
-              <LogOut className="w-4 h-4" />
-              Déconnexion
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-6 py-10">
+    <AdminShell title="Actualités" subtitle="Gérez vos publications et affiches">
         {/* Add button */}
         {!showForm && (
           <button
@@ -152,6 +117,16 @@ export default function AdminBlogPage() {
                   className="w-full bg-gray-900 border border-gray-800 text-white px-4 py-3 text-sm focus:outline-none focus:border-vexilon-primary transition-colors resize-none"
                   placeholder="Description de la publication..."
                 />
+                <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                  Les liens sont cliquables automatiquement. Collez l&apos;adresse
+                  telle quelle&nbsp;:{' '}
+                  <span className="text-gray-400">https://exemple.fr</span>, ou
+                  donnez-lui un libell&eacute;&nbsp;:{' '}
+                  <span className="text-gray-400">
+                    [Inscrivez-vous](https://exemple.fr)
+                  </span>
+                  .
+                </p>
               </div>
 
               <div>
@@ -253,7 +228,6 @@ export default function AdminBlogPage() {
             </div>
           ))}
         </div>
-      </main>
-    </div>
+    </AdminShell>
   );
 }
