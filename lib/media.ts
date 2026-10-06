@@ -29,6 +29,22 @@ export function extensionForMime(mime: string): string {
   return EXTENSION_BY_MIME[mime] || 'bin';
 }
 
+/**
+ * Type MIME d'un fichier deja depose, deduit de son extension.
+ *
+ * Table inverse de EXTENSION_BY_MIME : seules les extensions que nous avons
+ * nous-memes ecrites sont reconnues. Tout le reste renvoie null et n'est pas
+ * servi — un fichier arrive la par un autre chemin ne peut donc pas etre
+ * diffuse comme du contenu actif.
+ */
+const MIME_BY_EXTENSION: Record<string, string> = Object.fromEntries(
+  Object.entries(EXTENSION_BY_MIME).map(([mime, ext]) => [ext, mime])
+);
+
+export function mimeForExtension(extension: string): string | null {
+  return MIME_BY_EXTENSION[extension.toLowerCase()] || null;
+}
+
 /** Extensions considérées comme vidéo pour un chemin /uploads/... */
 const VIDEO_EXTENSIONS = ['.mp4', '.webm', '.ogg', '.ogv', '.mov'];
 
